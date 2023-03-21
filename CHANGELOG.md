@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- Build fix by following eslist promise rule on blob link generation
+
 ### Features
 
 - Init
