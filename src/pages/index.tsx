@@ -1,19 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+// import { useRouter } from "next/router";
 import { useState } from "react";
 import { PictureArea } from "~/components/PictureArea/pArea";
-import { HandleClick } from "~/utils/imageCopy";
-interface ClipboardItem {
-  types: string[];
-  // Add more properties as needed
-}
-
-declare var ClipboardItem: {
-  prototype: ClipboardItem;
-  new (itemData: { [mimeType: string]: Blob }): ClipboardItem;
-};
+import { MakeImage } from "~/utils/imageCopy";
 const Home: NextPage = () => {
   const themes = [
     "bg-gradient-to-br from-red-500 to-yellow-500",
@@ -29,6 +19,17 @@ const Home: NextPage = () => {
   ];
   const [lyrics, setLyrics] = useState<string>("");
   const [theme, setTheme] = useState<string>(themes[0] ?? "");
+  const handleClick = () => {
+    MakeImage()
+      .then((image) => {
+        if (image !== "") {
+          window.location.href = image;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <Head>
@@ -61,7 +62,7 @@ const Home: NextPage = () => {
           ))}
         </div>
         <button
-          onClick={HandleClick}
+          onClick={() => handleClick()}
           className="h-16 w-32 rounded-lg bg-stone-800 text-stone-200
           transition-all duration-200 hover:scale-95 hover:bg-stone-200 hover:text-stone-900"
         >
