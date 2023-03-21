@@ -20,6 +20,12 @@ const Home: NextPage = () => {
     "bg-gradient-to-br from-blue-500 to-purple-500",
     "bg-gradient-to-br from-green-500 to-yellow-500",
     "bg-gradient-to-br from-pink-500 to-purple-500",
+    "bg-gradient-to-br from-blue-500 to-yellow-500",
+    "bg-gradient-to-br from-red-500 to-purple-500",
+    "bg-gradient-to-br from-emerald-500 to-blue-500",
+    "bg-gradient-to-br from-violet-300 to-pink-300",
+    "bg-gradient-to-br from-fuchsia-500 to-cyan-500",
+    "bg-gradient-to-br from-slate-900 to-slate-700",
   ];
   const [lyrics, setLyrics] = useState<string>("");
   const [theme, setTheme] = useState<string>(themes[0] ?? "");
@@ -45,7 +51,7 @@ const Home: NextPage = () => {
           className="min-h-96 w-4/5 rounded-lg bg-stone-800 p-8 text-stone-200 outline-none"
           onChange={(e) => setLyrics(e.target.value)}
         />
-        <div className="flex h-fit w-4/5 flex-row items-center justify-around rounded-lg text-stone-200">
+        <div className="flex h-fit w-4/5 flex-row flex-wrap items-center justify-around rounded-lg text-stone-200">
           {themes.map((theme, idx) => (
             <button
               key={idx}
