@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - Init
 - Copy image to clipboard && blob redirect for unsupported browsers
+- Added toast message && functionality to tell user image is copied to clipboard
 
 ### Styling
 
