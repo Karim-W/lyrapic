@@ -1,12 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 import { useState } from "react";
-import ClipboardPolyfill from "clipboard-polyfill";
-import clipboardCopy from "clipboard-copy";
 import { PictureArea } from "~/components/PictureArea/pArea";
+import { HandleClick } from "~/utils/imageCopy";
 interface ClipboardItem {
   types: string[];
   // Add more properties as needed
@@ -17,28 +15,6 @@ declare var ClipboardItem: {
   new (itemData: { [mimeType: string]: Blob }): ClipboardItem;
 };
 const Home: NextPage = () => {
-  const HandleClick = async () => {
-    const node = document.getElementById("bg");
-    if (node) {
-      try {
-        const blob = await htmlToImage.toBlob(node);
-        if (!blob) return;
-        if ("ClipboardItem" in window) {
-          const data = [new ClipboardItem({ "image/png": blob })];
-          await navigator.clipboard.write(data);
-          console.log("Image copied to clipboard!");
-        } else {
-          const blobUrl = URL.createObjectURL(blob);
-
-          // Redirect the user to the URL
-          window.location.href = blobUrl;
-          console.log("Image copied to clipboard (fallback mode)!");
-        }
-      } catch (error) {
-        console.error("Failed to copy image: ", error);
-      }
-    }
-  };
   const themes = [
     "bg-gradient-to-br from-red-500 to-yellow-500",
     "bg-gradient-to-br from-blue-500 to-purple-500",
@@ -49,6 +25,11 @@ const Home: NextPage = () => {
   const [theme, setTheme] = useState<string>(themes[0] ?? "");
   return (
     <>
+      <Head>
+        <title>Lyrapic</title>
+        <meta name="description" content="Lyric to image converter" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div
         className="flex min-h-screen w-screen flex-col items-center 
         justify-center gap-8 overflow-scroll bg-stone-900
