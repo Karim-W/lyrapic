@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.1.0] - 2023-03-21
 
 ### Bug Fixes
 
@@ -10,7 +10,6 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- Init
 - Copy image to clipboard && blob redirect for unsupported browsers
 - Added toast message && functionality to tell user image is copied to clipboard
 
