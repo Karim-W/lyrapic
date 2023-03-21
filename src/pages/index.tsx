@@ -3,6 +3,8 @@ import Head from "next/head";
 // import { useRouter } from "next/router";
 import { useState } from "react";
 import { PictureArea } from "~/components/PictureArea/pArea";
+import { Toast } from "~/components/toast/toast";
+import { useToast } from "~/hooks/useToast";
 import { MakeImage } from "~/utils/imageCopy";
 const Home: NextPage = () => {
   const themes = [
@@ -24,12 +26,16 @@ const Home: NextPage = () => {
       .then((image) => {
         if (image !== "") {
           window.location.href = image;
+        } else {
+          addToast("Image added to clipboard!");
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  const { toast, addToast } = useToast();
+
   return (
     <>
       <Head>
@@ -37,6 +43,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Lyric to image converter" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Toast message={toast} />
       <div
         className="flex min-h-screen w-screen flex-col items-center 
         justify-center gap-8 overflow-scroll bg-stone-900
